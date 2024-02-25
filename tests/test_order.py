@@ -1,8 +1,8 @@
 import pytest
 from selenium import webdriver
 
-from order_page import OrderPage
-from main_page import MainPage
+from pages import OrderPage
+from pages import MainPage
 
 
 class TestOrder:

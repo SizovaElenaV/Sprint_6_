@@ -1,7 +1,7 @@
 import allure
 from selenium.webdriver.common.by import By
 
-from base_page import BasePage
+from .base_page import BasePage
 
 
 class OrderPage(BasePage):
@@ -35,37 +35,36 @@ class OrderPage(BasePage):
 
     @allure.step('Заполнение Имени в Поле Формы Ордера')
     def order_set_name(self, name):
-        self.send_keys(self.find_element(self.driver, self.name_locator), name)
+        self.send_keys(self.find_element(self.name_locator), name)
 
     @allure.step('Заполнение Фамилии в Поле Формы Ордера')
     def order_set_surname(self, surname):
-        self.send_keys(self.find_element(self.driver, self.surname_locator), surname)
+        self.send_keys(self.find_element(self.surname_locator), surname)
 
     @allure.step('Заполнение Города в Поле Формы Ордера')
     def order_set_area(self, area):
-        self.send_keys(self.find_element(self.driver, self.area_locator), area)
+        self.send_keys(self.find_element(self.area_locator), area)
 
     @allure.step('Заполнение Метро в Поле Формы Ордера')
     def order_set_metro(self, metro):
-        self.send_keys(self.find_element(self.driver, self.metro_locator), metro)
-        self.click(self.find_element(self.find_element(self.find_element(self.driver, self.metro_search),
-                                                       self.metro_index), self.metro_button))
+        self.send_keys(self.find_element(self.metro_locator), metro)
+        self.click(self.find_element(self.metro_search).find_element(*self.metro_index).find_element(*self.metro_button))
 
     @allure.step('Заполнение Телефона в Поле Формы Ордера')
     def order_set_phone(self, phone):
-        self.send_keys(self.find_element(self.driver, self.phone_locator), phone)
+        self.send_keys(self.find_element(self.phone_locator), phone)
 
     @allure.step('Переход на вторую стадию заполнения формы')
     def order_continue_button_click(self):
-        self.click(self.find_element(self.driver, self.continue_locator))
+        self.click(self.find_element(self.continue_locator))
 
     @allure.step('Нажатие на кнопку самокат')
     def order_samokat_button_click(self):
-        self.click(self.find_element(self.driver, self.samokat_locator))
+        self.click(self.find_element(self.samokat_locator))
 
     @allure.step('Нажатие на кнопку Яндекс в заголовке страницы')
     def order_dzen_button_click(self):
-        self.click(self.find_element(self.driver, self.dzen_locator))
+        self.click(self.find_element(self.dzen_locator))
 
     @allure.step('Заполнение второй части формы')
     def orderfinal_fill_form(self, date, rent, comment, black=True):
@@ -79,32 +78,33 @@ class OrderPage(BasePage):
 
     @allure.step('Заполнение Даты в Поле 2-ой Формы Ордера')
     def orderfinal_set_date(self, date):
-        self.send_keys(self.find_element(self.driver, self.date_locator), date)
+        self.send_keys(self.find_element(self.date_locator), date)
 
     @allure.step('Заполнение Аренды в Поле 2-ой Формы Ордера')
     def orderfinal_set_rent(self, rent):
-        self.click(self.find_element(self.driver, self.rent_button_locator))
-        self.click(self.find_element(self.driver, self._rent_locator(rent)))
+        self.click(self.find_element(self.rent_button_locator))
+        self.click(self.find_element(self._rent_locator(rent)))
 
     @allure.step('Выбор черного цвета в поле цвета 2-ой Формы Ордера')
     def orderfinal_set_black(self):
-        self.click(self.find_element(self.driver, self.color_black_locator))
+        self.click(self.find_element(self.color_black_locator))
 
     @allure.step('Выбор серого цвета в поле цвета 2-ой Формы Ордера')
     def orderfinal_set_grey(self):
-        self.click(self.find_element(self.driver, self.color_grey_locator))
+        self.click(self.find_element(self.color_grey_locator))
 
     @allure.step('Заполнение Коммента в Поле 2-ой Формы Ордера')
     def orderfinal_set_comment(self, comment):
-        self.send_keys(self.find_element(self.driver, self.comment_locator), comment)
+        self.send_keys(self.find_element(self.comment_locator), comment)
 
     @allure.step('Нажатии кнопки потверждения заявки')
     def orderfinal_button_click(self):
-        self.click(self.find_element(self.driver, self.orderbutton_locator))
+        self.click(self.find_element(self.orderbutton_locator))
 
     @allure.step('Нажатие нкопки на Попаппе')
     def orderfinal_popupbutton_click(self):
-        self.click(self.find_element(self.driver, self.popupbutton_locator))
+        self.click(self.find_element(self.popupbutton_locator))
 
     def _rent_locator(self, rent):
         return (By.XPATH, f"//*[contains(text(), '{rent}')]")
+
