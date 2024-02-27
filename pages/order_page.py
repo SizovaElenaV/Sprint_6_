@@ -108,3 +108,4 @@ class OrderPage(BasePage):
     def _rent_locator(self, rent):
         return (By.XPATH, f"//*[contains(text(), '{rent}')]")
 
+

@@ -47,3 +47,4 @@ class BasePage:
     def get_page_source(self):
         return self.driver.page_source
 
+

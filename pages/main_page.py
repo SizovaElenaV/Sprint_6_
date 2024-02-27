@@ -31,4 +31,5 @@ class MainPage(BasePage):
     def question_result_text(self, locator_inside):
         return self.get_text(self.find_element(self.question_block).find_element(*locator_inside)
                              .find_element(*self.locator_tag_name_p))
+    
 
