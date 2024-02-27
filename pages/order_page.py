@@ -56,7 +56,7 @@ class OrderPage(BasePage):
 
     @allure.step('Переход на вторую стадию заполнения формы')
     def order_continue_button_click(self):
-        self.click(self.find_element(self.continue_locator))
+        self.js_click(self.find_element(self.continue_locator))
 
     @allure.step('Нажатие на кнопку самокат')
     def order_samokat_button_click(self):

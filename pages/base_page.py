@@ -13,6 +13,10 @@ class BasePage:
     def execute_script(self, script, element):
         return self.driver.execute_script(script, element)
 
+    def js_click(self, elem):
+        return self.driver.execute_script("arguments[0].click()", elem)
+
+
     def click_element(self, element):
         return element.click()
 
