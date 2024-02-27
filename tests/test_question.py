@@ -1,8 +1,7 @@
 import pytest
 from selenium import webdriver
 
-from data import *
-from main_page import MainPage
+from pages import *
 
 
 class TestQuestion:
