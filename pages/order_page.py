@@ -16,6 +16,7 @@ class OrderPage(BasePage):
     metro_search = (By.CLASS_NAME, 'select-search__select')
     metro_index = (By.XPATH, "//li[@data-index='0']")
     metro_button = (By.TAG_NAME, 'button')
+    rent_template_locator = (By.XPATH, "//*[contains(text(), '{}')]")
 
     date_locator = (By.XPATH, "//input[@placeholder='* Когда привезти самокат']")
     rent_button_locator = (By.CLASS_NAME, "Dropdown-arrow")
@@ -106,6 +107,6 @@ class OrderPage(BasePage):
         self.click(self.find_element(self.popupbutton_locator))
 
     def _rent_locator(self, rent):
-        return (By.XPATH, f"//*[contains(text(), '{rent}')]")
+        return self.rent_template_locator[0], self.rent_template_locator[1].format(rent)
 
 

@@ -1,50 +1,52 @@
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.by import By
+
+popup_order_data = [
+        ('Щупик', 'Левченко', 'Ул.Красноземских', 'Комсомольская', '+79056743212', '04.02.2024', 'сутки', 'TTC'),
+        ('Любитель', 'Самокатов', 'Ул.САМОКАТЫЫ', 'Скобелевская', '+79099943212', '05.02.2024', 'семеро суток',
+         'БЫСТРЕЕ!!! Хочу кататься очень.')]
+
+price_locator = (By.ID, 'accordion__heading-0')
+price_result = 'Сутки — 400 рублей. Оплата курьеру — наличными или картой.'
+price_answer = (By.ID, 'accordion__panel-0')
 
 
-class BasePage:
-
-    def __init__(self, driver):
-        self.driver = driver
-
-    def find_element(self, locator):
-        return self.driver.find_element(*locator)
-
-    def execute_script(self, script, element):
-        return self.driver.execute_script(script, element)
-
-    def js_click(self, elem):
-        return self.driver.execute_script("arguments[0].click()", elem)
+multipy_locator = (By.ID, 'accordion__heading-1')
+multipy_result = ('Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто '
+                  'сделать несколько заказов — один за другим.')
+multipy_answer = (By.ID, 'accordion__panel-1')
 
 
-    def click_element(self, element):
-        return element.click()
+time_locator = (By.ID, 'accordion__heading-2')
+time_result = ('Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени '
+               'аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в '
+               '20:30, суточная аренда закончится 9 мая в 20:30.')
+time_answer = (By.ID, 'accordion__panel-2')
 
-    def get_attribute(self, element, attribute):
-        return element.get_attribute(attribute)
 
-    def get_text(self, element):
-        return element.text
+today_locator = (By.ID, 'accordion__heading-3')
+today_result = 'Только начиная с завтрашнего дня. Но скоро станем расторопнее.'
+today_answer = (By.ID, 'accordion__panel-3')
 
-    def send_keys(self, element, data):
-        element.send_keys(data)
+extension_locator = (By.ID, 'accordion__heading-4')
+extension_result = ('Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру '
+                    '1010.')
+extension_answer = (By.ID, 'accordion__panel-4')
 
-    def click(self, element):
-        element.click()
 
-    def get_current_url(self):
-        return self.driver.current_url
+charger_locator = (By.ID, 'accordion__heading-5')
+charger_result = ('Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете '
+                  'кататься без передышек и во сне. Зарядка не понадобится.')
+charger_answer = (By.ID, 'accordion__panel-5')
 
-    def switch(self):
-        self.driver.switch_to.window(self.driver.window_handles[1])
 
-    def windows_count(self):
-        return len(self.driver.window_handles)
+cancel_locator = (By.ID, 'accordion__heading-6')
+cancel_result = ('Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же '
+                 'свои.')
+cancel_answer = (By.ID, 'accordion__panel-6')
 
-    def wait_untill_url_to_be(self, url):
-        WebDriverWait(self.driver, 10).until(expected_conditions.url_to_be(url))
 
-    def get_page_source(self):
-        return self.driver.page_source
+zamkadish_locator = (By.ID, 'accordion__heading-7')
+zamkadish_result = 'Да, обязательно. Всем самокатов! И Москве, и Московской области.'
+zamkadish_answer = (By.ID, 'accordion__panel-7')
 
 

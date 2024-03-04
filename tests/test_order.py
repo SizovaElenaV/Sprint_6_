@@ -1,21 +1,19 @@
 import pytest
 from selenium import webdriver
-
+import allure
 from pages import OrderPage
 from pages import MainPage
+from data import *
 
 
 class TestOrder:
     driver = None
-    popup_order_data = [
-        ('Щупик', 'Левченко', 'Ул.Красноземских', 'Комсомольская', '+79056743212', '04.02.2024', 'сутки', 'TTC'),
-        ('Любитель', 'Самокатов', 'Ул.САМОКАТЫЫ', 'Скобелевская', '+79099943212', '05.02.2024', 'семеро суток',
-         'БЫСТРЕЕ!!! Хочу кататься очень.')]
 
     @classmethod
     def setup_class(cls):
-        cls.driver = webdriver.Edge()
+        cls.driver = webdriver.Firefox()
 
+    @allure.title('Проверка кнопки заказа в заголовке страницы')
     def test_header_order(self):
         self.driver.get('https://qa-scooter.praktikum-services.ru/')
         orderpage = MainPage(self.driver)
@@ -25,6 +23,7 @@ class TestOrder:
         assert orderpage.get_current_url() == 'https://qa-scooter.praktikum-services.ru/order', \
             'редирект не был завершен успешно'
 
+    @allure.title('Проверка кнопки заказа в карточке страницы')
     def test_roadmap_order(self):
         self.driver.get('https://qa-scooter.praktikum-services.ru/')
         orderpage = MainPage(self.driver)
@@ -34,6 +33,7 @@ class TestOrder:
         assert orderpage.get_current_url() == 'https://qa-scooter.praktikum-services.ru/order', \
             'редирект не был завершен успешно'
 
+    @allure.title('Проверка заполнения заказа в форме заказа')
     @pytest.mark.parametrize('name,surname,area,metro,phone,date,rent,comment',
                              popup_order_data)
     def test_popup_order(self, name, surname, area, metro, phone, date, rent, comment):
@@ -47,14 +47,15 @@ class TestOrder:
         order_page.orderfinal_popupbutton_click()
         assert 'Заказ оформлен' in order_page.get_page_source(), 'Заказ не оформлен'
 
-    #   В Google после нажатия кнопки "да" ничего не происходит, поэтому я не могу рассмотреть позитивный сценарий
 
+    @allure.title('Проверка кнопки перехода на главную страницу')
     def test_samokat_button_order(self):
         self.driver.get('https://qa-scooter.praktikum-services.ru/order/')
         order_page = OrderPage(self.driver)
         order_page.order_samokat_button_click()
         assert order_page.get_current_url() == 'https://qa-scooter.praktikum-services.ru/'
 
+    @allure.title('Проверка кнопки перехода на дзен')
     def test_dzen_button_order(self):
         self.driver.get('https://qa-scooter.praktikum-services.ru/order/')
         order_page = OrderPage(self.driver)
